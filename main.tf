@@ -20,9 +20,9 @@ resource "aws_security_group" "bia_dev" {
     vpc_id = "vpc-0468e2c0c68b1b069"
 
     ingress {
-        description = "Liberado 3002 para o mundo"
-        from_port = 3002
-        to_port = 3002
+        description = "Liberado 3001 para o mundo"
+        from_port = 3001
+        to_port = 3001
         protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }
@@ -45,6 +45,6 @@ resource "aws_instance" "bia-dev" {
     # vpc_security_group_ids = [ "sg-09d7b7a4d1599d938" ]
     vpc_security_group_ids = [ aws_security_group.bia_dev.id ]
     root_block_device {
-      volume_size = 10
+      volume_size = 12
     }
 }
