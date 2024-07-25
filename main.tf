@@ -15,12 +15,12 @@ provider "aws" {
 }
 
 resource "aws_security_group" "bia_dev" {
-    name = "bia-dev-tf"
-    description = "Regra para a instancia de trabalho bia-dev com tf"
+    name = "bia-dev"
+    description = "acesso da maquina de trabalho"
     vpc_id = "vpc-0468e2c0c68b1b069"
 
     ingress {
-        description = "Liberado 3001 para o mundo"
+        description = "liberado para o mundo"
         from_port = 3001
         to_port = 3001
         protocol = "tcp"
@@ -42,9 +42,10 @@ resource "aws_instance" "bia-dev" {
         Name = var.instance_name
         ambiente = "dev"
     }
-    # vpc_security_group_ids = [ "sg-09d7b7a4d1599d938" ]
     vpc_security_group_ids = [ aws_security_group.bia_dev.id ]
     root_block_device {
       volume_size = 12
     }
+    iam_instance_profile = aws_iam_instance_profile.role_acesso_ssm.name
+    user_data = file("user-data/user_data_ec2.sh")
 }
