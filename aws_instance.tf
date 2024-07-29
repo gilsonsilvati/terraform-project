@@ -1,4 +1,4 @@
-resource "aws_instance" "bia-dev" {
+resource "aws_instance" "bia_dev" {
     ami = "ami-0b72821e2f351e396"
     instance_type = "t3.micro"
     tags = {
@@ -10,5 +10,5 @@ resource "aws_instance" "bia-dev" {
       volume_size = 12
     }
     iam_instance_profile = aws_iam_instance_profile.role_acesso_ssm.name
-    user_data = file("user-data/user_data_ec2.sh")
+    user_data = file("userdata/userdata_biadev.sh")
 }

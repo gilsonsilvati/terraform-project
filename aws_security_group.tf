@@ -47,7 +47,7 @@ resource "aws_security_group" "bia_db" {
   revoke_rules_on_delete = null
   tags                   = {}
   tags_all               = {}
-  vpc_id                 = "vpc-0468e2c0c68b1b069"
+  vpc_id                 = local.vpc_id
 }
 
 resource "aws_security_group" "bia_alb" {
@@ -89,7 +89,7 @@ resource "aws_security_group" "bia_alb" {
   revoke_rules_on_delete = null
   tags                   = {}
   tags_all               = {}
-  vpc_id                 = "vpc-0468e2c0c68b1b069"
+  vpc_id                 = local.vpc_id
 }
 
 resource "aws_security_group" "bia_web" {
@@ -121,7 +121,7 @@ resource "aws_security_group" "bia_web" {
   revoke_rules_on_delete = null
   tags                   = {}
   tags_all               = {}
-  vpc_id                 = "vpc-0468e2c0c68b1b069"
+  vpc_id                 = local.vpc_id
 }
 
 resource "aws_security_group" "bia_ec2" {
@@ -153,13 +153,13 @@ resource "aws_security_group" "bia_ec2" {
   revoke_rules_on_delete = null
   tags                   = {}
   tags_all               = {}
-  vpc_id                 = "vpc-0468e2c0c68b1b069"
+  vpc_id                 = local.vpc_id
 }
 
 resource "aws_security_group" "bia_dev" {
     name = "bia-dev"
     description = "acesso da maquina de trabalho"
-    vpc_id = "vpc-0468e2c0c68b1b069"
+    vpc_id = local.vpc_id
 
     ingress {
         description = "liberado para o mundo"
