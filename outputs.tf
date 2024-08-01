@@ -29,12 +29,17 @@ output "rds_endpoint" {
 }
 
 output "rds_secrets_arn" {
-  description = "Secrets associado ao RDS"
+  description = "Secrets arn associado ao RDS"
   value       = tolist(aws_db_instance.bia.master_user_secret)[0].secret_arn
 }
 
+output "rds_secrets_name" {
+  description = "Secrets name associado ao RDS"
+  value = data.aws_secretsmanager_secret.bia_db.name
+}
+
 output "rds_secrets_status" {
-  description = "Secrets associado ao RDS"
+  description = "Secrets status associado ao RDS"
   value       = tolist(aws_db_instance.bia.master_user_secret)[0].secret_status
 }
 
