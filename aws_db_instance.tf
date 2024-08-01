@@ -55,11 +55,11 @@ resource "aws_db_instance" "bia" {
   timezone                              = null
   username                              = "postgres"
   vpc_security_group_ids                = [aws_security_group.bia_db.id]
-  db_subnet_group_name = aws_db_subnet_group.bia.name
+  db_subnet_group_name                  = aws_db_subnet_group.bia.name
 }
 
 resource "aws_db_subnet_group" "bia" {
-  name = "bia-subnet-group"
+  name       = "bia-subnet-group"
   subnet_ids = [local.subnet_zona_a, local.subnet_zona_b]
   tags = {
     name = "bia-subnet-group"

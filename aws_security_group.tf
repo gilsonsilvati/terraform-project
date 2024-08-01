@@ -157,22 +157,22 @@ resource "aws_security_group" "bia_ec2" {
 }
 
 resource "aws_security_group" "bia_dev" {
-    name = "bia-dev"
-    description = "acesso da maquina de trabalho"
-    vpc_id = local.vpc_id
+  name        = "bia-dev"
+  description = "acesso da maquina de trabalho"
+  vpc_id      = local.vpc_id
 
-    ingress {
-        description = "liberado para o mundo"
-        from_port = 3001
-        to_port = 3001
-        protocol = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
-    }
+  ingress {
+    description = "liberado para o mundo"
+    from_port   = 3001
+    to_port     = 3001
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
-    egress {
-        from_port = 0
-        to_port = 0
-        protocol = "-1"
-        cidr_blocks = ["0.0.0.0/0"]
-    }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
