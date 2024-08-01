@@ -1,6 +1,6 @@
 resource "aws_instance" "bia_dev" {
     ami = "ami-0b72821e2f351e396"
-    instance_type = "t3.micro"
+    instance_type = var.instance_type
     tags = {
         Name = var.instance_name
         ambiente = "dev"
