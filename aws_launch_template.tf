@@ -7,7 +7,13 @@ resource "aws_launch_template" "ecs_ec2" {
   image_id      = data.aws_ssm_parameter.ecs_node_ami.value
   instance_type = var.instance_type
   iam_instance_profile { arn = aws_iam_instance_profile.ecs_node.arn }
-  vpc_security_group_ids = [aws_security_group.bia_ec2.id]
+
+  network_interfaces {
+    associate_public_ip_address = true
+    security_groups             = [aws_security_group.bia_ec2.id]
+    # ipv6_address_count          = 1
+  }
+
   monitoring { enabled = false }
 
   user_data = base64encode(<<-EOF
