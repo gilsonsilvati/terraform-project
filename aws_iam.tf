@@ -20,7 +20,7 @@ resource "aws_iam_role" "role_acesso_ssm" {
   })
   description           = null
   force_detach_policies = false
-  managed_policy_arns   = ["arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryFullAccess", "arn:aws:iam::aws:policy/AmazonECS_FullAccess", "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"]
+  managed_policy_arns   = ["arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryFullAccess", "arn:aws:iam::aws:policy/AmazonECS_FullAccess", "arn:aws:iam::aws:policy/AmazonS3FullAccess", "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"]
   max_session_duration  = 3600
   name                  = "role-acesso-ssm"
   name_prefix           = null
@@ -28,4 +28,9 @@ resource "aws_iam_role" "role_acesso_ssm" {
   permissions_boundary  = null
   tags                  = {}
   tags_all              = {}
+}
+
+resource "aws_iam_role_policy_attachment" "role_acesso_ssm_policy" {
+  role       = aws_iam_role.role_acesso_ssm.name
+  policy_arn = aws_iam_policy.get_secret_bia_db.arn
 }
