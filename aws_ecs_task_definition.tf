@@ -1,6 +1,7 @@
 resource "aws_ecs_task_definition" "bia_web" {
-  family       = "task-def-bia"
-  network_mode = "bridge"
+  family        = "task-def-bia"
+  network_mode  = "bridge"
+  task_role_arn = aws_iam_role.ecs_task_role.arn
 
   container_definitions = jsonencode([{
     name              = "bia",
@@ -11,15 +12,23 @@ resource "aws_ecs_task_definition" "bia_web" {
     memoryReservation = 400
     environment = [
       { name = "DB_PORT", value = "5432" },
-      { name = "DB_HOST", value = "${aws_db_instance.bia.address}" }
+      { name = "DB_HOST", value = "${aws_db_instance.bia.address}" },
+      { name = "DB_SECRET_NAME", value = "${data.aws_secretsmanager_secret.bia_db.name}" },
+      { name = "DB_REGION", value = var.availability_zone },
+      { name = "DEBUG_SECRET", value = "false" }
     ]
     logConfiguration = {
       logDriver = "awslogs",
       options = {
-        "awslogs-region"        = "us-east-1",
+        "awslogs-region"        = var.availability_zone,
         "awslogs-group"         = aws_cloudwatch_log_group.ecs_bia_web.name,
         "awslogs-stream-prefix" = "bia"
       }
     },
   }])
+
+  runtime_platform {
+    operating_system_family = "LINUX"
+    cpu_architecture        = "X86_64"
+  }
 }

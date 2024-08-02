@@ -9,3 +9,9 @@ variable "instance_type" {
   description = "Tipo da instancia ec2 de trabalho"
   default     = "t3.micro"
 }
+
+variable "availability_zone" {
+  type        = string
+  description = "Zona de disponibilidade"
+  default     = "us-east-1"
+}
