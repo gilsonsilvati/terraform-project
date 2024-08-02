@@ -35,7 +35,7 @@ output "rds_secrets_arn" {
 
 output "rds_secrets_name" {
   description = "Secrets name associado ao RDS"
-  value = data.aws_secretsmanager_secret.bia_db.name
+  value       = data.aws_secretsmanager_secret.bia_db.name
 }
 
 output "rds_secrets_status" {
@@ -46,4 +46,9 @@ output "rds_secrets_status" {
 output "ecr_repo_url" {
   description = "Repositoria da BIA"
   value       = aws_ecr_repository.bia.repository_url
+}
+
+output "alb_url" {
+  description = "URL do ALB da BIA"
+  value       = aws_lb.bia.dns_name
 }
