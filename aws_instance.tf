@@ -9,7 +9,7 @@ resource "aws_instance" "bia_dev" {
   associate_public_ip_address = true
   vpc_security_group_ids      = [aws_security_group.bia_dev.id]
   root_block_device {
-    volume_size = 12
+    volume_size = 20
   }
   iam_instance_profile = aws_iam_instance_profile.role_acesso_ssm.name
   user_data            = file("userdata/userdata_biadev.sh")
